@@ -14,11 +14,12 @@ import com.google.android.material.snackbar.Snackbar
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
+    val repositorio = TaskLocalRepository.getInstance()
     private val getResult =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
             when(it.resultCode){
                 Activity.RESULT_OK ->{
-                    binding.tasks.adapter = TasksAdapter(TaskLocalRepository.getInstance().tasks, ::onShareItem)
+                    binding.tasks.adapter = TasksAdapter(repositorio.tasks, ::onShareItem)
                 }
                 Activity.RESULT_CANCELED ->{
                     Snackbar.make(this,binding.root,"Se ha cancleado",Snackbar.LENGTH_SHORT).show()
@@ -30,7 +31,7 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.tasks.adapter = TasksAdapter(TaskLocalRepository.getInstance().tasks, ::onShareItem)
+        binding.tasks.adapter = TasksAdapter(repositorio.tasks, ::onShareItem)
 
         binding.extendedFab.setOnClickListener {
             val intent = Intent(this, CreateToDoActivity::class.java)
@@ -46,9 +47,16 @@ class MainActivity : AppCompatActivity() {
         val intent = Intent().apply{
             action = Intent.ACTION_SEND
             putExtra(Intent.EXTRA_TEXT,"COMPARTIR")
+            type = "text/plain"
         }
         val shareIntent = Intent.createChooser(intent, null)
         startActivity(shareIntent)
+    }
+
+    fun onEditCard(task:Task, view:View){
+        val editIntent = Intent(this, EditToDoActivity:: class.java)
+        editIntent.putExtra("TASK", task)
+        startActivity(editIntent)
     }
 
     override fun onResume(){
