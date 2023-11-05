@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">ToDo</string>
+    <string name="extended_fab_label">Crear Tarea</string>
+    <string name="extended_fab_content_desc">Boton para añadir una tarea</string>
+    <string name="form_button">Crear</string>
+    <string name="description_label">Descripción</string>
+    <string name="title_label">Título</string>
+    <string name="text_switch">Completada</string>
+    <string name="task_title_placeholder">%1$s</string>
+    <string name="task_description_placeholder">%2$s</string>
+    <string name="share_text">La tarea con titulo %1s y descripcion %2s esta %3s</string>
+</resources>
