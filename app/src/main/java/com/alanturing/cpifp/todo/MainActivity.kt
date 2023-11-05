@@ -19,7 +19,7 @@ class MainActivity : AppCompatActivity() {
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
             when(it.resultCode){
                 Activity.RESULT_OK ->{
-                    binding.tasks.adapter = TasksAdapter(repositorio.tasks, ::onShareItem)
+                    binding.tasks.adapter = TasksAdapter(repositorio.tasks, ::onShareItem, ::onEditCard)
                 }
                 Activity.RESULT_CANCELED ->{
                     Snackbar.make(this,binding.root,"Se ha cancleado",Snackbar.LENGTH_SHORT).show()
@@ -31,7 +31,7 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.tasks.adapter = TasksAdapter(repositorio.tasks, ::onShareItem)
+        binding.tasks.adapter = TasksAdapter(repositorio.tasks, ::onShareItem, ::onEditCard)
 
         binding.extendedFab.setOnClickListener {
             val intent = Intent(this, CreateToDoActivity::class.java)

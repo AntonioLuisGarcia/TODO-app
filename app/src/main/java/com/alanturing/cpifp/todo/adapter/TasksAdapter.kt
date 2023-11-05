@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.alanturing.cpifp.todo.databinding.TodoItemBinding
 import com.alanturing.cpifp.todo.model.Task
 
-class TasksAdapter(val datos:List<Task>, var onShareClicked: (t:Task, v:View) -> Unit): RecyclerView.Adapter<TasksAdapter.TaskViewHolder>() {
+class TasksAdapter(val datos:List<Task>, var onShareClicked: (t:Task, v:View) -> Unit, val onEditCard:(task:Task, v:View)-> Unit): RecyclerView.Adapter<TasksAdapter.TaskViewHolder>() {
 
     inner class TaskViewHolder(private val binding: TodoItemBinding): RecyclerView.ViewHolder(binding.root) {
 
